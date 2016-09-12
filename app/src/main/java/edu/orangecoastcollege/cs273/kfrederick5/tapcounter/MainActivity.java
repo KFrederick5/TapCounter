@@ -1,9 +1,7 @@
 package edu.orangecoastcollege.cs273.kfrederick5.tapcounter;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,9 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button tapButton;
     private TextView countText;
-
-    //Associate controller with needed model
-    Counter myCount = new Counter();
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +24,9 @@ public class MainActivity extends AppCompatActivity {
         tapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                countText.addTextChangedListener(countTextChangedListener);
+                count++;
+                countText.setText(Integer.toString(count));
             }
         });
     }
-
-    private TextWatcher countTextChangedListener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            //Nothing
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            try {
-                myCount.addOne();
-            }
-            catch (NumberFormatException e) {
-                countText.setText("");
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            //Nothing
-        }
-    };
 }
